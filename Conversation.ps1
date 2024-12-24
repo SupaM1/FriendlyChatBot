@@ -13,37 +13,29 @@ $promptMessage2 = "$($BotName): Your name is $($username), isn't it?! I haven't 
 Write-Output $promptMessage1
 Write-Output $promptMessage2
 
-function Change-Username {
-    param (
-        [string]$ChangeName
-    )
-    $promptMessage3 = "Okay, If you don't like being called $($username), then I'll call you something else."
-    Write-Output $promptMessage3
-    $username = Read-Host "Okay, what do you want to be called?"
-    $promptMessage4 = "Hello there $($username)!"
-    $promptMessage5 = "Glad we got that settled!"
-    $promptMessage6 = "Since you're so fussy, I thought I'd say if you don't like being called $username, just let me know again."
-    Write-Output $promptMessage4
-    Write-Output $promptMessage5
-    Write-Output $promptMessage6
+# Define the Change-Username function
+function Set-Username {
+    $newUsername = Read-Host "Please enter your correct username"
+    $global:username = $newUsername
+    Write-Output "Username has been changed to $username"
 }
 
 # Function to prompt the user for input
-function Ask-User {
+function Show-UserPrompt {
     param (
-        [string]$message
+        [string]$prompt
     )
-    return Read-Host $message
+    return Read-Host $prompt
 }
 
 # Prompt the user for input
 $userResponse = Ask-User "Your response"
 
 # Check if the user wants to change their username
-if ($userResponse -eq "I'm not $username!") {
-    Change-Username -ChangeName $userResponse
-} else {
-    $promptMessage7 = "Great! I will continue calling you $($username)."
-    Write-Output $promptMessage7
+if ($userResponse -like "I'm not $username*") {
+    Change-Username
 }
+
+# Continue with the rest of the script
+Write-Output "$($BotName): Nice to meet you, $username!"
 Write-Output "What now?"
