@@ -37,7 +37,7 @@ $result = Find-OSAndUser
 $OS = $result.OS
 $username = $result.Username
 
-# Output the greeting and OS information
+# Output the greeting
 Write-Output "Hello there $username!"
 Write-Output "And you're on $OS"
 Write-Output "What would you like to do?"
